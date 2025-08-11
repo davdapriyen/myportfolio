@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="DAVDA PRIYEN's official portfolio website showcasing Flutter & Web Development projects, skills, educational journey, and contact information. Hire a skilled Flutter and Web Developer in Rajkot, Gujarat.">
+    <meta name="keywords" content="DAVDA PRIYEN, Flutter Developer, Web Developer, UI/UX Designer, Rajkot, Gujarat, Portfolio, App Development, Firebase, Dart, HTML, CSS, JavaScript, Education, Hire Developer">
+    <title>DAVDA PRIYEN | Portfolio</title>
+    <!-- Favicon - Add your actual favicon.ico or .png here -->
+    <link rel="icon" type="image/png" href="paa.jpg">
+    <!-- EmailJS CDN added -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Montserrat:wght@900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Adjusted blue and pink combination with increased blue intensity for better visibility on dark background */
+            --primary-color: #4A90E2; /* A clear, bright blue */
+            --secondary-color: #E0E7FF; /* Light bluish-gray for text, providing good contrast */
+            --dark-bg: #111827; /* Original dark background */
+            --light-bg: #F9FAFB; /* Original light background */
+            /* Gradient for blue dominance with a touch of pink/purple for highlights */
+            --accent-gradient-start: #4A90E2; /* Stronger blue start */
+            --accent-gradient-mid: #6A7BFF; /* Transitioning to a slightly purplish blue */
+            --accent-gradient-end: #CC66FF; /* Ending with a vibrant pink/purple */
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--secondary-color);
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3, .font-display {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        /* Hero Section with Image Background and Overlay */
+        #home {
+            background-image: url('a.jpg'); /* User's uploaded image */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            position: relative;
+        }
+        
+        #home::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.75); /* Slightly darker overlay for better text visibility */
+            z-index: 1;
+        }
+
+        .home-content {
+            position: relative;
+            z-index: 3; /* Content should be above the animation */
+        }
+        
+        /* Animation Styling - Background Particles */
+        .animated-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 2; /* Sits between the overlay and the content */
+            pointer-events: none; /* Allows clicks to go through to the main content */
+        }
+
+        .animated-bg span {
+            position: absolute;
+            bottom: -150px;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            animation: moveUp 25s linear infinite;
+            border-radius: 50%;
+            opacity: 0;
+        }
+
+        @keyframes moveUp {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 0;
+            }
+            20% {
+                opacity: 1;
+            }
+            80% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-1000px) scale(0);
+                opacity: 0;
+            }
+        }
+        
+        /* Applying different animation properties for variety to background particles */
+        .animated-bg span:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .animated-bg span:nth-child(2) { left: 20%; width: 20px; height: 20px; animation-duration: 12s; animation-delay: 2s; }
+        .animated-bg span:nth-child(3) { left: 25%; animation-duration: 15s; animation-delay: 4s; }
+        .animated-bg span:nth-child(4) { left: 40%; width: 50px; height: 50px; animation-duration: 20s; animation-delay: 0s; }
+        .animated-bg span:nth-child(5) { left: 70%; animation-duration: 18s; animation-delay: 1s; }
+        .animated-bg span:nth-child(6) { left: 80%; width: 30px; height: 30px; animation-duration: 14s; animation-delay: 3s; }
+        .animated-bg span:nth-child(7) { left: 90%; animation-duration: 16s; animation-delay: 5s; }
+        .animated-bg span:nth-child(8) { left: 55%; width: 60px; height: 60px; animation-duration: 22s; animation-delay: 2s; }
+
+        /* Hero Text Gradient - Using new professional colors */
+        .gradient-text {
+            background: linear-gradient(90deg, var(--accent-gradient-start), var(--accent-gradient-mid), var(--accent-gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Hover Bounce Animation for Icons */
+        @keyframes bounce-y {
+            0%, 100% { transform: translateY(-5%); }
+            50% { transform: none; }
+        }
+
+        .skill-card:hover .skill-icon {
+            animation: bounce-y 0.8s infinite;
+        }
+        
+        /* Fade-in-up animation on scroll */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease-out;
+        }
+
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-100 { transition-delay: 0.1s; }
+        .delay-200 { transition-delay: 0.2s; }
+        .delay-300 { transition-delay: 0.3s; }
+        .delay-400 { transition-delay: 0.4s; }
+
+        /* Custom Project Card Hover Effect - Enhanced */
+        .project-card {
+            border: 1px solid rgba(74, 144, 226, 0.3); /* Subtle border using primary color */
+            transition: all 0.3s ease-in-out;
+        }
+        .project-card:hover {
+            box-shadow: 0 12px 28px rgba(74, 144, 226, 0.4); /* Stronger shadow on hover */
+            transform: translateY(-10px) scale(1.02); /* More pronounced lift and scale */
+        }
+
+        /* Responsive Navbar */
+        #mobile-menu {
+            transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+        }
+
+        #mobile-menu.open {
+            max-height: 500px;
+            opacity: 1;
+        }
+
+        /* Typing cursor effect */
+        .typing-cursor {
+            display: inline-block;
+            width: 2px;
+            background-color: var(--primary-color);
+            animation: blink-caret 0.75s step-end infinite;
+        }
+
+        /* Blinking caret animation */
+        @keyframes blink-caret {
+            from, to { background-color: transparent; }
+            50% { background-color: var(--primary-color); }
+        }
+
+        /* Button Hover Effects - Adjusted for new primary color */
+        .btn-primary:hover {
+            box-shadow: 0 5px 15px rgba(74, 144, 226, 0.4); /* Using primary color for shadow */
+            background-color: #3672C8; /* Darker shade of primary for hover */
+            transform: translateY(-2px);
+        }
+        .btn-secondary:hover {
+            background-color: var(--primary-color);
+            color: white;
+            box-shadow: 0 5px 15px rgba(74, 144, 226, 0.4); /* Using primary color for shadow */
+            transform: translateY(-2px);
+        }
+
+        /* Message Box Styling */
+        .message-box {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            color: white;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+        }
+        .message-box.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .message-box.success {
+            background-color: #28a745; /* Green */
+        }
+        .message-box.error {
+            background-color: #dc3545; /* Red */
+        }
+        .message-box.loading {
+            background-color: #007bff; /* Blue */
+        }
+
+        /* New: Navigation Link Underline Animation */
+        .nav-link-underline {
+            position: relative;
+            text-decoration: none; /* Remove default underline */
+            color: var(--secondary-color); /* Default link color */
+            transition: color 0.3s ease; /* Smooth color transition on hover */
+        }
+
+        .nav-link-underline::after {
+            content: '';
+            position: absolute;
+            width: 0%;
+            height: 2px;
+            background-color: var(--primary-color); /* Underline color */
+            left: 0;
+            bottom: -5px; /* Adjust position below text */
+            transition: width 0.3s ease-out; /* Smooth width transition */
+        }
+
+        .nav-link-underline:hover {
+            color: var(--primary-color); /* Text color on hover */
+        }
+
+        .nav-link-underline:hover::after {
+            width: 100%; /* Expand underline on hover */
+        }
+
+        /* Contact Section Specific Styles - Enhanced */
+        .contact-info-card, .contact-form-card { /* Apply consistent styling to both */
+            background-color: #1a2233; /* Slightly lighter background for contact info */
+            border: 1px solid rgba(74, 144, 226, 0.3);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, background-color 0.3s ease-in-out;
+        }
+
+        .contact-info-card:hover, .contact-form-card:hover {
+            transform: translateY(-8px); /* More pronounced lift */
+            box-shadow: 0 15px 30px rgba(74, 144, 226, 0.5); /* Stronger, more diffused shadow */
+            background-color: #1f2937; /* Slightly darker on hover */
+        }
+
+
+        /* Footer Specific Styles */
+        .footer-link {
+            transition: color 0.3s ease-in-out, transform 0.2s ease-in-out;
+        }
+        .footer-link:hover {
+            color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .social-icon-footer {
+            transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+        }
+        .social-icon-footer:hover {
+            transform: scale(1.2);
+            color: var(--primary-color); /* Highlight color on hover */
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-200 antialiased">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-gray-900 bg-opacity-80 backdrop-blur-lg z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-3xl font-display font-extrabold gradient-text">DP.</a>
+            <div class="hidden md:flex space-x-8 text-lg font-semibold">
+                <a href="#home" class="nav-link-underline">Home</a>
+                <a href="#about" class="nav-link-underline">About Me</a>
+                <a href="#education" class="nav-link-underline">Education</a>
+                <a href="#skills" class="nav-link-underline">Skills</a>
+                <a href="#projects" class="nav-link-underline">Projects</a>
+                <a href="#contact" class="nav-link-underline">Contact</a>
+            </div>
+            <button id="mobile-menu-toggle" class="md:hidden text-2xl text-gray-300 hover:text-primary-color transition">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden bg-gray-800 border-t border-gray-700">
+            <ul class="flex flex-col items-center gap-4 py-4 text-lg">
+                <li><a href="#home" class="block w-full text-center py-2 hover:bg-gray-700 transition">Home</a></li>
+                <li><a href="#about" class="block w-full text-center py-2 hover:bg-gray-700 transition">About Me</a></li>
+                <li><a href="#education" class="block w-full text-center py-2 hover:bg-gray-700 transition">Education</a></li>
+                <li><a href="#skills" class="block w-full text-center py-2 hover:bg-gray-700 transition">Skills</a></li>
+                <li><a href="#projects" class="block w-full text-center py-2 hover:bg-gray-700 transition">Projects</a></li>
+                <li><a href="#contact" class="block w-full text-center py-2 hover:bg-gray-700 transition">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center text-center">
+        <!-- New Animated Background Particles -->
+        <div class="animated-bg">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <div class="home-content max-w-7xl mx-auto px-6 py-12">
+            <p class="text-4xl md:text-5xl text-gray-200 font-semibold mb-2 fade-in-up">
+                Hi There, I'm
+            </p>
+            <h1 class="text-6xl md:text-8xl font-display font-extrabold mb-4 fade-in-up delay-100">
+                <span class="gradient-text">DAVDA PRIYEN</span>
+            </h1>
+            <h2 class="text-2xl md:text-3xl text-gray-200 font-semibold mb-8 fade-in-up delay-200">
+                I Am Into <span id="typed-text"></span><span class="typing-cursor">|</span>
+            </h2>
+            <div class="flex flex-col sm:flex-row justify-center gap-6 fade-in-up delay-400">
+                <!-- Updated Resume button to link to the new resume.html page -->
+                <a href="resume.html" class="px-8 py-3 bg-primary-color text-white rounded-lg shadow-lg hover:bg-[#3672C8] transition duration-300 ease-in-out btn-primary">
+                    <i class="fas fa-file-alt mr-2"></i> My Resume
+                </a>
+                <a href="#contact" class="px-8 py-3 bg-transparent border-2 border-primary-color text-primary-color rounded-lg shadow-lg hover:bg-primary-color hover:text-white transition duration-300 ease-in-out btn-secondary">
+                    <i class="fas fa-envelope mr-2"></i> Contact Me
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Combined About Me Section -->
+    <section id="about" class="py-20 bg-gray-800 text-gray-200">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+            <div class="fade-in-up">
+                <h2 class="text-4xl font-display font-bold mb-6 gradient-text">About Me</h2>
+                <p class="text-lg leading-relaxed mb-4 text-gray-300">
+                    I am a highly dedicated and passionate <b style="color: #4A90E2;">Flutter & Web Developer</b> with over <b style="color: #4A90E2;">6 months of hands-on experience</b>. My expertise lies in crafting user-friendly, efficient, and scalable mobile and web applications that provide seamless digital experiences.
+                </p>
+                <p class="text-lg leading-relaxed mb-4 text-gray-300">
+                    My journey in technology is driven by a strong commitment to <b style="color: #4A90E2;">clean code</b>, innovative <b style="color: #4A90E2;">UI/UX design</b>, and a relentless focus on solving complex <b style="color: #4A90E2;">real-world problems</b>. I believe that robust technical solutions combined with intuitive design are key to creating impactful software.
+                </p>
+                <p class="text-lg leading-relaxed text-gray-300">
+                    Currently, I am enhancing my skills and contributing to innovative projects under the valuable guidance of <b style="color: #4A90E2;">Mdidminfoway</b>. This experience continues to refine my abilities and expand my practical knowledge in the fast-evolving tech landscape.
+                </p>
+            </div>
+            <div class="fade-in-up delay-200 bg-gray-900 p-8 rounded-xl shadow-2xl">
+                <h3 class="text-3xl font-semibold mb-6 text-primary-color">Personal Details</h3>
+                <div class="space-y-5">
+                    <div class="flex items-center space-x-4">
+                        <div class="text-2xl text-primary-color"><i class="fas fa-map-marker-alt"></i></div>
+                        <div>
+                            <p class="font-medium text-lg">Location</p>
+                            <p class="text-gray-400">Rajkot, Gujarat (360002)</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div class="text-2xl text-primary-color"><i class="fas fa-envelope"></i></div>
+                        <div>
+                            <p class="font-medium text-lg">Email</p>
+                            <p class="text-gray-400">davdapriyen@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div class="text-2xl text-primary-color">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div>
+                            <p class="font-medium text-lg">Phone</p>
+                            <p class="text-gray-400">+91 7622906424</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div class="text-2xl text-primary-color"><i class="fas fa-briefcase"></i></div>
+                        <div>
+                            <p class="font-medium text-lg">Experience</p>
+                            <p class="text-gray-400">6+ months</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div class="text-2xl text-primary-color"><i class="fas fa-building"></i></div>
+                        <div>
+                            <p class="font-medium text-lg">Company</p>
+                            <p class="text-gray-400">Mididminfoway</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div class="text-2xl text-primary-color"><i class="fas fa-language"></i></div>
+                        <div>
+                            <p class="font-medium text-lg">Languages</p>
+                            <p class="text-400">English, Gujarati, Hindi</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="py-20 bg-gray-900 text-gray-200">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-4xl font-display font-bold text-center mb-12 gradient-text fade-in-up">My Education Journey</h2>
+            <div class="grid md:grid-cols-2 gap-10">
+                <!-- Education Item 1: Harivandna College -->
+                <div class="fade-in-up bg-gray-800 p-8 rounded-xl shadow-2xl flex flex-col md:flex-row items-center md:items-start gap-6">
+                    <!-- Replace 'https://placehold.co/120x120/4B5563/FFFFFF?text=College' with the actual URL from your database/server -->
+                    <img src="hvc.jpg" alt="Harivandna College logo" class="w-24 h-24 md:w-32 md:h-32 rounded-lg object-cover flex-shrink-0">
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-2 text-primary-color">Harivandna College, Rajkot</h3>
+                        <div class="space-y-2 text-gray-300">
+                            <p><i class="fas fa-book-open mr-2 text-primary-color"></i> Degree: Bachelor of Computer Applications (BCA)</p>
+                            <p><i class="fas fa-calendar-alt mr-2 text-primary-color"></i> Years: 2023 - 2025</p>
+                            <p><i class="fas fa-chart-line mr-2 text-primary-color"></i> Status: Pursuing</p>
+                            <p><i class="fas fa-university mr-2 text-primary-color"></i> University: Saurashtra University</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Education Item 2: Delta Science School -->
+                <div class="fade-in-up delay-100 bg-gray-800 p-8 rounded-xl shadow-2xl flex flex-col md:flex-row items-center md:items-start gap-6">
+                    <!-- Replace 'https://placehold.co/120x120/4B5563/FFFFFF?text=School' with the actual URL from your database/server -->
+                    <img src="delta scince school.jpg" alt="Delta Science School logo" class="w-24 h-24 md:w-32 md:h-32 rounded-lg object-cover flex-shrink-0">
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-2 text-primary-color">Delta Science School, Upleta</h3>
+                        <div class="space-y-2 text-gray-300">
+                            <p><i class="fas fa-book-open mr-2 text-primary-color"></i> Level: 10th & 12th (Commerce)</p>
+                            <p><i class="fas fa-calendar-alt mr-2 text-primary-color"></i> Years: 2020 - 2023</p>
+                            <p><i class="fas fa-check-circle mr-2 text-primary-color"></i> Status: Completed</p>
+                            <p><i class="fas fa-university mr-2 text-primary-color"></i> Board: Gujarat Board</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 bg-gray-900 text-gray-200">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-4xl font-display font-bold text-center mb-12 gradient-text fade-in-up">My Skills</h2>
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-8">
+                <!-- Skill Card: Flutter (using inline SVG for reliable rendering) -->
+                <div class="skill-card p-6 rounded-xl bg-gray-800 shadow-xl text-center cursor-pointer transition transform hover:-translate-y-2 fade-in-up">
+                    <div class="skill-icon text-5xl mb-4" style="display: flex; justify-content: center;">  
+                        <img src="flutter_2.svg" alt="" style="height: 40px;">
+                    </div>
+                    <h3 class="text-xl font-semibold">Flutter</h3>
+                </div>
+                <!-- Skill Card: Dart (using inline SVG for reliable rendering) -->
+                <div class="skill-card p-6 rounded-xl bg-gray-800 shadow-xl text-center cursor-pointer transition transform hover:-translate-y-2 fade-in-up delay-100">
+                    <div class="skill-icon text-5xl mb-4" style="display: flex; justify-content: center;">                        
+                        <img src="dart-removebg-preview.png" alt="" style="height: 50px;">
+                    </div>
+                    <h3 class="text-xl font-semibold">Dart</h3>
+                </div>
+                <!-- Skill Card -->
+                <div class="skill-card p-6 rounded-xl bg-gray-800 shadow-xl text-center cursor-pointer transition transform hover:-translate-y-2 fade-in-up delay-200">
+                    <div class="skill-icon text-5xl text-[#FFCA28] mb-4">
+                        <i class="fas fa-fire"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold">Firebase</h3>
+                </div>
+                <!-- Skill Card -->
+                <div class="skill-card p-6 rounded-xl bg-gray-800 shadow-xl text-center cursor-pointer transition transform hover:-translate-y-2 fade-in-up delay-300">
+                    <div class="skill-icon text-5xl text-gray-400 mb-4">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold">SQL</h3>
+                </div>
+                <!-- Skill Card -->
+                <div class="skill-card p-6 rounded-xl bg-gray-800 shadow-xl text-center cursor-pointer transition transform hover:-translate-y-2 fade-in-up delay-400">
+                    <div class="skill-icon text-5xl text-[#E34F26] mb-4">
+                        <i class="fab fa-html5"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold">HTML5</h3>
+                </div>
+                <!-- Add more skill cards here -->
+                <div class="skill-card p-6 rounded-xl bg-gray-800 shadow-xl text-center cursor-pointer transition transform hover:-translate-y-2 fade-in-up">
+                    <div class="skill-icon text-5xl text-[#1572B6] mb-4">
+                        <i class="fab fa-css3-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold">CSS3</h3>
+                </div>
+                <div class="skill-card p-6 rounded-xl bg-gray-800 shadow-xl text-center cursor-pointer transition transform hover:-translate-y-2 fade-in-up delay-100">
+                    <div class="skill-icon text-5xl text-[#000] mb-4">
+                        <i class="fab fa-figma"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold">Figma</h3>
+                </div>
+                <div class="skill-card p-6 rounded-xl bg-gray-800 shadow-xl text-center cursor-pointer transition transform hover:-translate-y-2 fade-in-up delay-200">
+                    <div class="skill-icon text-5xl text-[#f6019d] mb-4">
+                        <i class="fab fa-dribbble"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold">UI/UX</h3>
+                </div>
+                <div class="skill-card p-6 rounded-xl bg-gray-800 shadow-xl text-center cursor-pointer transition transform hover:-translate-y-2 fade-in-up delay-300">
+                    <div class="skill-icon text-5xl text-[#F7DF1E] mb-4">
+                        <i class="fab fa-js"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold">JavaScript</h3>
+                </div>
+                <div class="skill-card p-6 rounded-xl bg-gray-800 shadow-xl text-center cursor-pointer transition transform hover:-translate-y-2 fade-in-up delay-400">
+                    <div class="skill-icon text-5xl text-[#000] mb-4">
+                        <i class="fab fa-github"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold">Git</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-gray-800 text-gray-200">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-4xl font-display font-bold text-center mb-12 gradient-text fade-in-up">My Work</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <!-- Project 1: Simple Flutter Billing & Stock Management App -->
+                <div class="project-card bg-gray-900 rounded-xl overflow-hidden shadow-2xl transform transition-all duration-300 hover:-translate-y-2 fade-in-up">
+                    <h1 class="w-full h-48 object-cover d-flex text-center bg-white" style="display: flex; justify-content: center; align-items: center; font-size: 30px; background-color: #4A90E2;">Billing App</h1>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-semibold text-primary-color mb-2">Simple Flutter Billing & Stock Management App</h3>
+                        <p class="text-gray-400 text-sm mb-4">Developed a billing system to manage product stock with real-time quantity updates. Created itemized customer bills with PDF generation and sharing features. Designed a simple, responsive UI for easy billing and inventory handling. Used setState for state management without any external libraries. Demonstrated skills in business logic, PDF file handling, and UI/UX design.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-primary-color/20 text-primary-color text-xs px-3 py-1 rounded-full">Flutter</span>
+                            <span class="bg-primary-color/20 text-primary-color text-xs px-3 py-1 rounded-full">Dart</span>
+                            <span class="bg-primary-color/20 text-primary-color text-xs px-3 py-1 rounded-full">setState</span>
+                        </div>
+                        <!-- Changed to a video link -->
+                        <a href="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1" target="_blank" class="text-primary-color hover:text-white hover:underline transition font-semibold">
+                            <i class="fas fa-video mr-2"></i> View Demo Video
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Project 2: Live Dealer Finder App with Excel Import & Map Integration -->
+                <div class="project-card bg-gray-900 rounded-xl overflow-hidden shadow-2xl transform transition-all duration-300 hover:-translate-y-2 fade-in-up delay-100">
+                    <h1 class="w-full h-48 object-cover d-flex text-center bg-white" style="display: flex; justify-content: center; align-items: center; font-size: 30px; background-color: #6A7BFF;">Dealer Finder Map</h1>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-semibold text-primary-color mb-2">Live Dealer Finder App with Excel Import & Map Integration</h3>
+                        <p class="text-gray-400 text-sm mb-4">Imported dealer data from Excel and uploaded it to a backend via API. Retrieved dealer data and displayed locations on Google Maps with dynamic pins. Used GetX for efficient state management and navigation. Built a responsive map UI to help clients find nearby dealers. Demonstrated practical use of file handling.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-primary-color/20 text-primary-color text-xs px-3 py-1 rounded-full">GetX</span>
+                            <span class="bg-primary-color/20 text-primary-color text-xs px-3 py-1 rounded-full">Google Maps API</span>
+                            <span class="bg-primary-color/20 text-primary-color text-xs px-3 py-1 rounded-full">API Integration</span>
+                        </div>
+                        <!-- Changed to a video link -->
+                        <a href="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1" target="_blank" class="text-primary-color hover:text-white hover:underline transition font-semibold">
+                            <i class="fas fa-video mr-2"></i> View Demo Video
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Project 3: Bag Selling E-Commerce App with Razorpay Integration -->
+                <div class="project-card bg-gray-900 rounded-xl overflow-hidden shadow-2xl transform transition-all duration-300 hover:-translate-y-2 fade-in-up delay-200">
+                    <h1 class="w-full h-48 object-cover d-flex text-center bg-white" style="display: flex; justify-content: center; align-items: center; font-size: 30px; background-color: #CC66FF;">Bag Selling App</h1>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-semibold text-primary-color mb-2">Bag Selling E-Commerce App with Razorpay Integration</h3>
+                        <p class="text-gray-400 text-sm mb-4">Created an e-commerce app to browse and purchase various bags. Integrated Razorpay for secure and seamless online payments. Developed features like product list, add to cart, and order confirmation. Focused on clean UI design for a smooth user shopping experience. Showcased skills in payment gateway integration and Flutter UI building.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-primary-color/20 text-primary-color text-xs px-3 py-1 rounded-full">Flutter</span>
+                            <span class="bg-primary-color/20 text-primary-color text-xs px-3 py-1 rounded-full">Dart</span>
+                            <span class="bg-primary-color/20 text-primary-color text-xs px-3 py-1 rounded-full">Razorpay</span>
+                            <span class="bg-primary-color/20 text-primary-color text-xs px-3 py-1 rounded-full">Custom UI</span>
+                        </div>
+                        <!-- Changed to a video link -->
+                        <a href="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1" target="_blank" class="text-primary-color hover:text-white hover:underline transition font-semibold">
+                            <i class="fas fa-video mr-2"></i> View Demo Video
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gray-900 text-gray-200">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-4xl font-display font-bold text-center mb-12 gradient-text fade-in-up">Get In Touch</h2>
+            <div class="max-w-3xl mx-auto grid md:grid-cols-2 gap-8">
+                <!-- Contact Info -->
+                <div class="space-y-6 p-8 rounded-xl shadow-2xl contact-info-card fade-in-up delay-100">
+                    <h3 class="text-3xl font-semibold mb-6 text-primary-color">Contact Information</h3> <!-- Added heading -->
+                    <div class="flex items-center space-x-4">
+                        <div class="text-2xl text-primary-color">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <p class="font-medium text-lg">Location</p>
+                            <p class="text-gray-400">Rajkot, Gujarat, India</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div class="text-2xl text-primary-color">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>
+                            <p class="font-medium text-lg">Email</p>
+                            <p class="text-gray-400">davdapriyen@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div class="text-2xl text-primary-color">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div>
+                            <p class="font-medium text-lg">Phone</p>
+                            <p class="text-gray-400">+91 7622906424</p>
+                        </div>
+                    </div>
+                    <div class="flex space-x-4 pt-4">
+                        <a href="https://www.linkedin.com/in/davda-priyen-616ba8299" target="_blank" class="text-2xl text-gray-400 hover:text-primary-color transition social-icon-footer"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://github.com/davdapriyen" target="_blank" class="text-2xl text-gray-400 hover:text-primary-color transition social-icon-footer"><i class="fab fa-github"></i></a>
+                        <a href="https://www.facebook.com/DavdaPriyen" target="_blank" class="text-2xl text-gray-400 hover:text-primary-color transition social-icon-footer"><i class="fab fa-facebook"></i></a>
+                        <a href="https://www.instagram.com/davdapriyen59" target="_blank" class="text-2xl text-gray-400 hover:text-primary-color transition social-icon-footer"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <!-- Contact Form -->
+                <form id="contact-form" class="space-y-6 p-8 rounded-xl shadow-2xl contact-form-card fade-in-up delay-200">
+                    <input type="text" name="user_name" placeholder="Your Name" class="w-full p-3 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-primary-color" required>
+                    <input type="email" name="user_email" placeholder="Your Email" class="w-full p-3 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-primary-color" required>
+                    <input type="text" name="subject" placeholder="Subject" class="w-full p-3 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-primary-color" required>
+                    <textarea name="message" placeholder="Your Message" rows="5" class="w-full p-3 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-primary-color" required></textarea>
+                    <button type="submit" id="send-button" class="w-full py-3 bg-primary-color text-white rounded-lg font-semibold shadow-lg hover:bg-[#3672C8] transition">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-400 py-10">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
+            <!-- Footer Section 1: Brand & Copyright -->
+            <div class="flex flex-col items-center md:items-start">
+                <a href="#" class="text-4xl font-display font-extrabold gradient-text mb-4">DP.</a>
+                <p>&copy; 2025 Priyen. All rights reserved.</p>
+                <p class="text-sm mt-2">Designed with ❤️ by DAVDA PRIYEN</p>
+            </div>
+
+            <!-- Footer Section 2: Quick Links -->
+            <div>
+                <h3 class="text-xl font-semibold text-white mb-4">Quick Links</h3>
+                <ul class="space-y-2">
+                    <li><a href="#home" class="footer-link hover:text-primary-color">Home</a></li>
+                    <li><a href="#about" class="footer-link hover:text-primary-color">About Me</a></li>
+                    <li><a href="#skills" class="footer-link hover:text-primary-color">Skills</a></li>
+                    <li><a href="#projects" class="footer-link hover:text-primary-color">Projects</a></li>
+                    <li><a href="#contact" class="footer-link hover:text-primary-color">Contact</a></li>
+                </ul>
+            </div>
+
+            <!-- Footer Section 3: Social Media & Contact -->
+            <div>
+                <h3 class="text-xl font-semibold text-white mb-4">Connect With Me</h3>
+                <div class="flex justify-center md:justify-start space-x-6 mb-4">
+                    <a href="https://www.linkedin.com/in/davda-priyen-616ba8299" target="_blank" class="text-3xl text-gray-400 social-icon-footer"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/davdapriyen" target="_blank" class="text-3xl text-gray-400 social-icon-footer"><i class="fab fa-github"></i></a>
+                    <a href="https://www.facebook.com/DavdaPriyen" target="_blank" class="text-3xl text-gray-400 social-icon-footer"><i class="fab fa-facebook"></i></a>
+                    <a href="https://www.instagram.com/davdapriyen59" target="_blank" class="text-3xl text-gray-400 social-icon-footer"><i class="fab fa-instagram"></i></a>
+                </div>
+                <p class="flex items-center justify-center md:justify-start text-lg mt-4">
+                    <i class="fas fa-envelope mr-2 text-primary-color"></i> davdapriyen@gmail.com
+                </p>
+                <p class="flex items-center justify-center md:justify-start text-lg">
+                    <i class="fas fa-phone mr-2 text-primary-color"></i> +91 7622906424
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a id="backToTopBtn" href="#home" class="fixed bottom-6 right-6 p-4 rounded-full bg-primary-color text-white shadow-lg transition-all duration-300 opacity-0 invisible hover:bg-[#3672C8]">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <!-- Message Box for Form Submissions -->
+    <div id="message-box" class="message-box"></div>
+
+    <!-- JavaScript for Animations and Interactions -->
+    <script>
+        // EmailJS Initialization
+        (function() {
+            emailjs.init({
+                publicKey: "sr4Ks1-wzmboywY-R", // Your EmailJS User ID
+            });
+        })();
+
+        // Intersection Observer for fade-in animations
+        const faders = document.querySelectorAll('.fade-in-up');
+        const appearOptions = {
+            threshold: 0.2
+        };
+        const appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll) {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) {
+                    return;
+                } else {
+                    entry.target.classList.add('visible');
+                    appearOnScroll.unobserve(entry.target);
+                }
+            }
+            );
+        }, appearOptions);
+
+        faders.forEach(fader => {
+            appearOnScroll.observe(fader);
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('open');
+        });
+
+        // Back to Top Button visibility
+        const backToTopBtn = document.getElementById('backToTopBtn');
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.remove('opacity-0', 'invisible');
+                backToTopBtn.classList.add('opacity-100', 'visible');
+            } else {
+                backToTopBtn.classList.remove('opacity-100', 'visible');
+                backToTopBtn.classList.add('opacity-0', 'invisible');
+            }
+        });
+
+        // Typing and Deleting Animation for Hero Text
+        const typedTextSpan = document.getElementById('typed-text');
+        const roles = ["App Developer ", "Flutter Developer ", "UI/UX Designer ","Android developer "];
+        const typingSpeed = 100; // milliseconds per character
+        const deletingSpeed = 60; // milliseconds per character
+        const delayBetweenRoles = 1500; // milliseconds before typing next role
+
+        let roleIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+
+        function typeWriter() {
+            const currentRole = roles[roleIndex];
+            if (isDeleting) {
+                // Deleting text
+                typedTextSpan.textContent = currentRole.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                // Typing text
+                typedTextSpan.textContent = currentRole.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let currentTypingSpeed = typingSpeed;
+            if (isDeleting) {
+                currentTypingSpeed = deletingSpeed;
+            }
+
+            if (!isDeleting && charIndex === currentRole.length) {
+                // Done typing, start deleting after a delay
+                currentTypingSpeed = delayBetweenRoles;
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                // Done deleting, move to next role
+                isDeleting = false;
+                roleIndex = (roleIndex + 1) % roles.length;
+                currentTypingSpeed = 500; // Short delay before starting to type next role
+            }
+
+            setTimeout(typeWriter, currentTypingSpeed);
+        }
+
+        // Message Box Display Function
+        function showMessageBox(message, type) {
+            const msgBox = document.getElementById('message-box');
+            msgBox.textContent = message;
+            msgBox.className = 'message-box show'; // Reset and add 'show'
+            if (type) {
+                msgBox.classList.add(type); // Add type-specific class (success, error, loading)
+            }
+            setTimeout(() => {
+                msgBox.classList.remove('show');
+                msgBox.className = 'message-box'; // Reset classes after fading out
+            }, 3000); // Message disappears after 3 seconds
+        }
+
+        // Handle Contact Form Submission with EmailJS
+        const contactForm = document.getElementById('contact-form');
+        const sendButton = document.getElementById('send-button');
+
+        contactForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            sendButton.disabled = true; // Disable the button
+            sendButton.textContent = 'Sending...'; // Show loading text
+            showMessageBox('Sending message...', 'loading'); // Show loading message
+
+            // Your EmailJS Service ID and Template ID
+            const serviceID = "service_r9td9d9"; // Your EmailJS Service ID
+            const templateID = "template_00bmvlu"; // Your EmailJS Template ID
+
+            emailjs.sendForm(serviceID, templateID, this)
+                .then(() => {
+                    showMessageBox('Message sent successfully!', 'success'); // Success message
+                    contactForm.reset(); // Reset the form
+                    sendButton.disabled = false; // Re-enable the button
+                    sendButton.textContent = 'Send Message'; // Reset button text
+                }, (error) => {
+                    console.error('Failed to send email:', error); // Log error to console
+                    showMessageBox('Failed to send message! Please try again.', 'error'); // Error message
+                    sendButton.disabled = false; // Re-enable the button
+                    sendButton.textContent = 'Send Message'; // Reset button text
+                });
+        });
+
+        // Start the typing effect when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            typeWriter();
+        });
+    </script>
+</body>
+</html>
